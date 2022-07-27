@@ -20,7 +20,8 @@ const Addproducts = () => {
         { method:'POST',
         body:JSON.stringify({name,price,category,userid,company}),
         headers:{
-          'Content-Type':'application/json'
+          'Content-Type':'application/json',
+          authentication:`bearer ${JSON.parse(localStorage.getItem('token'))}`
         }
         });
         data=await data.json();

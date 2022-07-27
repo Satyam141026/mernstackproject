@@ -13,17 +13,22 @@ const Header = () => {
         {auth ? <ul className='right' >
             <li> <Link className='link' to="/">Product</Link></li>
             <li> <Link className='link' to="/addproducts">Add Products</Link></li>
-            <li> <Link className='link' to="/updateproducts/:id">Update Product</Link></li>
-            <li> <Link className='link' to="/profile">Profile</Link></li>
+        
+            <li> <Link className='link' to="/show">UserDetail</Link></li>
      
          <li><Link onClick={()=>{logout()}} className='link' to="/signup">Logout</Link></li>
          </ul>   
           :
           <>
-          <ul>
-          <li><Link className='link' to="/signup">Signup</Link></li>
-          <li> <Link className='link' to="/login">login</Link></li>
+          <ul class="nav justify-content-center nav">
+              <li class="nav-item">
+              <li><Link className='link' to="/signup">Signup</Link></li>
+              </li>
+              <li class="nav-item">
+              <li> <Link className='link' to="/login">login</Link></li>
+              </li>
           </ul>
+        
           </>
             }
           

@@ -27,7 +27,12 @@ productList();
 
   }
   async function productList(){
-     let result= await fetch(productGetUrl)
+     let result= await fetch(productGetUrl,{
+      headers:{
+        authentication:`bearer ${JSON.parse(localStorage.getItem('token'))}`
+      }
+
+     })
      result= await result.json()
      setData(result)
 
@@ -38,7 +43,12 @@ productList();
     let key=e.target.value
     
     if(key){
-      let result= await fetch(`http://localhost:5000/search/${key}`)
+      let result= await fetch(`http://localhost:5000/search/${key}`,{
+        headers:{
+          authentication:`bearer ${JSON.parse(localStorage.getItem('token'))}`
+        }
+  
+       })
     result= await result.json() 
     console.log(result,'result')
       setData(result)
@@ -67,7 +77,8 @@ productList();
         
       </thead>
       <tbody>
-      {data.length>0 && data.map((cv,index,arr)=>{
+      {data.length>0 ? 
+      data.map((cv,index,arr)=>{
      return(
       <tr  key={index}>
       <td>{cv._id}</td>
@@ -78,15 +89,18 @@ productList();
       <td>
         <button onClick={()=>{deleteData(cv._id)}}>Delete</button>
         <Link className='link' to={`/updateproducts/${cv._id}`}>Update</Link>
+        <Link className='link' to={`/addproducts`}>Add Product</Link>
+        <Link className='link' to={`/profile/${cv._id}`}>View User Product Detail</Link>
       </td>
  
       </tr>
      )
          
-      })
+      }):<tr><td colSpan={6} ><h1 className='sinput'>Data is not Found</h1></td></tr>
       }
           </tbody>
     </table>
+
       </div>
 
   )

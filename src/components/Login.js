@@ -21,20 +21,23 @@ useEffect(()=>{
             let data=await fetch('http://localhost:5000/login',
             {
                 method:'POST',
-                body: JSON.stringify({email,password}),
-                headers:{
+                body: JSON.stringify({email,password})
+         /*        headers:{
                     'Content-Type': 'application/json'
-                }
+                } */
             });
-            data= await data.json();
-            console.log(data,'success')
+           let result= await data.json();
+          console.log('login',result)
+        
+            console.log(result.data,'success')
             Swal.fire(
                 'Good job!',
                 'You clicked the button!',
                 'success'
               )
-            if(data.email){
-                localStorage.setItem('data',JSON.stringify(data.name));
+            if(result.auth){
+                localStorage.setItem('data',JSON.stringify(result.data));
+                localStorage.setItem('token',JSON.stringify(result.auth));
                 navigate('/')
 
 

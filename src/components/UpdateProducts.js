@@ -18,7 +18,15 @@ collectData();
   },[])
  async  function collectData(){
     console.log(name,price,category,userid,company)
-     let result= await fetch("http://localhost:5000/getsingle/"+param.id)
+     let result= await fetch("http://localhost:5000/getsingle/"+param.id,
+     {
+      headers:{
+        authentication:`bearer ${JSON.parse(localStorage.getItem('token'))}`
+      }
+
+     }
+     
+     )
     result= await result.json()
     console.log(result[0].name,'result')
     setName(result[0].name)
@@ -31,7 +39,9 @@ console.log(param)
   async function updateData(){
     let data=await fetch('http://localhost:5000/update/'+userid,
    { method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json',
+    authentication:`bearer ${JSON.parse(localStorage.getItem('token'))}`
+   },
     body: JSON.stringify({name,price,category,company })
 }
     )
